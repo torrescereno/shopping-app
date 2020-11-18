@@ -3,7 +3,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Producto{
-  id: number;
   nombre: string;
   categoria: string;
   cantidad: number;
@@ -18,6 +17,8 @@ export interface Producto{
 
 export class ProductosService {
 
+  url = 'https://shopping-app-d41b8.firebaseio.com/productos.json';
+
   constructor(private http: HttpClient ) { }
 
   /* guardarProductos():Observable<any>{
@@ -25,7 +26,7 @@ export class ProductosService {
   } */
 
   getProducto():Observable<any>{
-    return this.http.get('https://shopping-app-d41b8.firebaseio.com/productos.json');
+    return this.http.get(this.url);
   }
 
 }

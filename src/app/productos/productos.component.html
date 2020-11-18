@@ -1,0 +1,41 @@
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <h4>Productos</h4>
+        </div>
+        
+    </div>
+    
+    <div class="row">
+        <div class="col-12 col-md-3" *ngFor="let producto of productos; let i = index">
+            <div class="card mt-3" >
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">{{ producto.nombre | uppercase}}</h5>
+                  <p class="card-text">{{ producto.descripcion }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Nombre: {{ producto.nombre }}</li>
+                  <li class="list-group-item">Categoría: {{ producto.categoria }}</li>
+                  <li class="list-group-item">Cantidad: {{ producto.cantidad }}</li>
+                  <li class="list-group-item">Precio: {{ producto.precio | descuento}}</li>
+                </ul>
+                <div class="card-body">
+                  <a href="#" class="card-link">Comprar</a>
+                  <a href="#" class="card-link">Detalle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+

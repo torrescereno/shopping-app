@@ -10,22 +10,17 @@
     
     <div class="row">
         <div class="col-12 col-md-3" *ngFor="let producto of productos; let i = index">
-            <div class="card mt-3" >
-               <!--  <img [src]="producto.imagen" class="card-img-top"> -->
+            <div class="card h-100 mt-3" >
+                <img [src]="producto.imagen" class="card-img-top">
                 <div class="card-body">
                   <h5 class="card-title">{{ producto.nombre | uppercase}}</h5>
-                  <p class="card-text">{{ producto.descripcion }}</p>
+                  <p class="card-text" >Categoría: {{ producto.categoria }}</p>
+                  <p class="card-text" >Precio: {{ producto.precio | descuento}}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Nombre: {{ producto.nombre }}</li>
-                  <li class="list-group-item">Categoría: {{ producto.categoria }}</li>
-                  <li class="list-group-item">Cantidad: {{ producto.cantidad }}</li>
-                  <li class="list-group-item">Precio: {{ producto.precio | descuento}}</li>
-                </ul>
-                <div class="card-body">
-                  <a href="#" class="card-link">Comprar</a>
-                  <a href="#" class="card-link">Detalle</a>
-                </div>
+                <!-- <div class="card-body p-0 text-center">
+                  <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="login">Comprar</button>
+                  <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="login">Detalle</button>
+                </div> -->
             </div>
         </div>
     </div>

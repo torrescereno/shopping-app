@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface Producto{
   nombre: string;
@@ -19,14 +20,17 @@ export class ProductosService {
 
   url = 'https://shopping-app-d41b8.firebaseio.com/productos.json';
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient, private authService: AuthService ) { }
 
   /* guardarProductos():Observable<any>{
     return this.http.put('https://shopping-app-d41b8.firebaseio.com/productos.json', this.productos);
   } */
 
   getProducto():Observable<any>{
-    return this.http.get(this.url);
+    return this.http.get(this.url,{
+        params: new HttpParams().set('auth', this.authService.idToken)
+      }
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,10 +11,11 @@ import { ProductosComponent } from './productos/productos.component';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { DescuentoPipe } from './pipes/descuento.pipe';
+import { FormsModule } from '@angular/forms';
 
 // Routing
 import { routesPages } from './app.route';
-import { DescuentoPipe } from './pipes/descuento.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { DescuentoPipe } from './pipes/descuento.pipe';
     ErrorComponent,
     LoginComponent,
     RegistroComponent,
-    DescuentoPipe
+    DescuentoPipe,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +35,7 @@ import { DescuentoPipe } from './pipes/descuento.pipe';
     NgbModule,
     HttpClientModule,
     routesPages,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

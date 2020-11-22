@@ -2,9 +2,8 @@
 import { HomeComponent } from './home/home.component';
 import { MiListaComponent } from './mi-lista/mi-lista.component';
 import { ProductosComponent } from './productos/productos.component';
-import { LoginComponent } from './login/login.component';
+import { AuthComponent } from './auth/auth.component';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistroComponent } from './registro/registro.component';
 
 
 const routes: Routes = [
@@ -27,12 +26,8 @@ const routes: Routes = [
     },
     {
       path: 'login',
-      component: LoginComponent,
+      component: AuthComponent,
     },
-    {
-      path: 'registro',
-      component: RegistroComponent,
-    }
   ];
 
   export const routesPages = RouterModule.forRoot(routes);

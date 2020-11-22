@@ -6,24 +6,26 @@ import { Observer } from 'rxjs';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class AuthComponent implements OnInit {
 
   @ViewChild('form') formulario: NgForm;
 
   isLoading: boolean;
   error: string;
+  login = true;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.authService);
   }
 
-  onSubmit() {
+  onSubmit(login): void {
 
     this.isLoading = true;
     this.error = null;
@@ -33,25 +35,39 @@ export class LoginComponent implements OnInit {
       error: (error) => this.handleError(error),
       complete: () => this.isLoading = false,
 
-    }
+    };
 
-    /* Login */
-    this.authService.login(this.formulario.value.email, this.formulario.value.password).subscribe(
-      observer
-    );
+    if (login) {
+      /* Login */
+      this.authService.login(this.formulario.value.email, this.formulario.value.password).subscribe(
+        observer
+      );
+    }else{
+      /* Registro */
+      this.authService.registro(this.formulario.value.email, this.formulario.value.password).subscribe(
+        observer
+      );
+    }
   }
 
-  handleResponse(resp){
+  handleResponse(resp): void{
     this.formulario.value.email = '';
     this.formulario.value.password = '';
     this.isLoading = false;
     this.router.navigate(['home']);
   }
 
-  handleError(error){
+  handleError(error): void{
     this.error = error;
     this.isLoading = false;
   }
 
+  formRegistro(): void{
+    this.login = false;
+  }
+
+  formLogin(): void{
+    this.login = true;
+  }
 
 }

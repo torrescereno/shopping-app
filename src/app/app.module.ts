@@ -9,13 +9,13 @@ import { HomeComponent } from './home/home.component';
 import { MiListaComponent } from './mi-lista/mi-lista.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ErrorComponent } from './error/error.component';
-import { LoginComponent } from './login/login.component';
-import { RegistroComponent } from './registro/registro.component';
+import { AuthComponent } from './auth/auth.component';
 import { DescuentoPipe } from './pipes/descuento.pipe';
 import { FormsModule } from '@angular/forms';
 
 // Routing
 import { routesPages } from './app.route';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +25,9 @@ import { routesPages } from './app.route';
     MiListaComponent,
     ProductosComponent,
     ErrorComponent,
-    LoginComponent,
-    RegistroComponent,
+    AuthComponent,
     DescuentoPipe,
+    UsuarioComponent,
   ],
   imports: [
     BrowserModule,

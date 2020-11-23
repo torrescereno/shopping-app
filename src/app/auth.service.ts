@@ -100,7 +100,7 @@ export class AuthService {
   logOut(): void {
     localStorage.removeItem('user');
     this.router.navigate(['home']);
-    this.idToken = null;
+    this.user$.next(null);
   }
 
 }

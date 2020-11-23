@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { tap} from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap} from 'rxjs/operators';
+import { User } from './models/user.model';
 
 
 interface AuthReponseData {
@@ -27,6 +28,8 @@ export class AuthService {
   private readonly API_KEY = 'AIzaSyCQILq8PvZjVRqTtZ8Ly2303G7FwpqD_Hk';
   idToken: string;
 
+  user$ = new BehaviorSubject<User>(null);
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -43,7 +46,9 @@ export class AuthService {
     {
       params: new HttpParams().set('key', this.API_KEY)
     }
-  ).pipe(tap(resp => this.idToken = resp.idToken));
+  ).pipe(
+    catchError(this.controladorError),
+    tap((resp) => this.controlarUserario(resp)));
  }
 
  registro(email: string, password: string): Observable<AuthReponseData>{
@@ -58,6 +63,26 @@ export class AuthService {
     {
       params: new HttpParams().set('key', this.API_KEY)
     }
-  ).pipe(tap(resp => this.idToken = resp.idToken));
+  ).pipe(
+    catchError(this.controladorError),
+    tap((resp) => this.controlarUserario(resp)));
  }
+
+ controladorError(resp: any): Observable<any>{
+  const error = 'Se producjo un error';
+  return throwError(error);
+ }
+
+ controlarUserario(resp: AuthReponseData): void{
+  
+  this.idToken = resp.idToken;
+  const expira = new Date(new Date().getTime() + Number(resp.expiresIn) * 1000);
+  const user = new User(resp.email, resp.localId, resp.idToken, expira);
+
+  console.log(user);
+  console.log(resp);
+    
+  this.user$.next(user);
+ }
+
 }

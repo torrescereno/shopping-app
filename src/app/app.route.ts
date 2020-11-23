@@ -4,6 +4,7 @@ import { MiListaComponent } from './mi-lista/mi-lista.component';
 import { ProductosComponent } from './productos/productos.component';
 import { AuthComponent } from './auth/auth.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -19,10 +20,12 @@ const routes: Routes = [
     {
       path: 'lista',
       component: MiListaComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'productos',
       component: ProductosComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'login',

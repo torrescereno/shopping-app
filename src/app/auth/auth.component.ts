@@ -22,7 +22,6 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.authService);
   }
 
   onSubmit(login): void {

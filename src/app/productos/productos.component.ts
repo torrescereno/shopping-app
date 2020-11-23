@@ -14,9 +14,14 @@ export class ProductosComponent implements OnInit {
   constructor(private productoSerice: ProductosService, private auhtService: AuthService) { }
 
   ngOnInit(): void {
-    this.productoSerice.getProducto().subscribe(data => {
-      this.productos = data;
-    });
+
+    if (this.auhtService.idToken) {
+      this.productoSerice.getProducto().subscribe(data => {
+        this.productos = data;
+      });
+    }else{
+      console.log('sesion cerrada');
+    }
   }
 
 }

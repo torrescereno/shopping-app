@@ -86,8 +86,6 @@ export class AuthService {
   autoLogin(): void{
     const datosUser = JSON.parse(localStorage.getItem('user'));
 
-    console.log('autologin', datosUser);
-
     if (!datosUser) {
       return;
     } else {
@@ -103,7 +101,6 @@ export class AuthService {
     localStorage.removeItem('user');
     this.router.navigate(['home']);
     this.idToken = null;
-    
   }
 
 }

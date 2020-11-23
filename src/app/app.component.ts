@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto, ProductosService } from './productos.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +10,11 @@ import { Producto, ProductosService } from './productos.service';
 export class AppComponent implements OnInit{
   title = 'angular-coder-app';
 
-  constructor(private productoSerice: ProductosService) { }
+  constructor(private auhtService: AuthService) { }
 
   ngOnInit(): void {
+    this.auhtService.autoLogin();
   }
-
-  /* guardar(){
-    this.productoSerice.guardarProductos().subscribe(data => {
-      console.log('data: ', data);
-    });
-  }
- */
-
 }
 
 

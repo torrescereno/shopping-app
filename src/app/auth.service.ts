@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap} from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from './models/user.model';
 
 
@@ -33,56 +33,77 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
- login(email: string, password: string): Observable<AuthReponseData> {
+  login(email: string, password: string): Observable<AuthReponseData> {
 
-  const urlLogin = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword';
+    const urlLogin = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword';
 
-  return this.http.post<AuthLoginResponseData>(
-    `${urlLogin}`, {
-    email,
-    password,
-    returnSecureToken: true,
-  },
-    {
-      params: new HttpParams().set('key', this.API_KEY)
+    return this.http.post<AuthLoginResponseData>(
+      `${urlLogin}`, {
+      email,
+      password,
+      returnSecureToken: true,
+    },
+      {
+        params: new HttpParams().set('key', this.API_KEY)
+      }
+    ).pipe(
+      catchError(this.controladorError),
+      tap((resp) => this.controlarUserario(resp)));
+  }
+
+  registro(email: string, password: string): Observable<AuthReponseData> {
+
+    const urlRegistro = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp';
+
+    return this.http.post<AuthLoginResponseData>(
+      `${urlRegistro}`, {
+      email,
+      password,
+    },
+      {
+        params: new HttpParams().set('key', this.API_KEY)
+      }
+    ).pipe(
+      catchError(this.controladorError),
+      tap((resp) => this.controlarUserario(resp)));
+  }
+
+  controladorError(resp: any): Observable<any> {
+    const error = 'Se producjo un error';
+    return throwError(error);
+  }
+
+  controlarUserario(resp: AuthReponseData): void {
+
+    this.idToken = resp.idToken;
+    const expira = new Date(new Date().getTime() + Number(resp.expiresIn) * 1000);
+    const user = new User(resp.email, resp.localId, resp.idToken, expira);
+
+    localStorage.setItem('user', JSON.stringify(user));
+    this.user$.next(user);
+  }
+
+  autoLogin(): void{
+    const datosUser = JSON.parse(localStorage.getItem('user'));
+
+    console.log('autologin', datosUser);
+
+    if (!datosUser) {
+      return;
+    } else {
+      const usuarioCargado: User = new User(datosUser.email, datosUser.id, datosUser._token, datosUser._tokenExpirationDate);
+      if (usuarioCargado.token) {
+        this.idToken = usuarioCargado.token;
+        this.user$.next(usuarioCargado);
+      }
     }
-  ).pipe(
-    catchError(this.controladorError),
-    tap((resp) => this.controlarUserario(resp)));
- }
+  }
 
- registro(email: string, password: string): Observable<AuthReponseData>{
-
-  const urlRegistro = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp';
-
-  return this.http.post<AuthLoginResponseData>(
-    `${urlRegistro}`, {
-    email,
-    password,
-  },
-    {
-      params: new HttpParams().set('key', this.API_KEY)
-    }
-  ).pipe(
-    catchError(this.controladorError),
-    tap((resp) => this.controlarUserario(resp)));
- }
-
- controladorError(resp: any): Observable<any>{
-  const error = 'Se producjo un error';
-  return throwError(error);
- }
-
- controlarUserario(resp: AuthReponseData): void{
-  
-  this.idToken = resp.idToken;
-  const expira = new Date(new Date().getTime() + Number(resp.expiresIn) * 1000);
-  const user = new User(resp.email, resp.localId, resp.idToken, expira);
-
-  console.log(user);
-  console.log(resp);
+  logOut(): void {
+    localStorage.removeItem('user');
+    this.router.navigate(['home']);
+    this.idToken = null;
     
-  this.user$.next(user);
- }
+  }
 
 }

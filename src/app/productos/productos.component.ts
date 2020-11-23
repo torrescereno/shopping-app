@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto, ProductosService } from '../productos.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-productos',
@@ -10,7 +11,7 @@ export class ProductosComponent implements OnInit {
 
   productos: Producto[];
 
-  constructor(private productoSerice: ProductosService) { }
+  constructor(private productoSerice: ProductosService, private auhtService: AuthService) { }
 
   ngOnInit(): void {
     this.productoSerice.getProducto().subscribe(data => {

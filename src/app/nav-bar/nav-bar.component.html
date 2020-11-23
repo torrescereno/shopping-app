@@ -21,7 +21,13 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
       </form> -->
-      <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="login">Login</button>
+      <ng-template [ngIf]="!estaAutenticado">
+        <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="login">Login</button>
+      </ng-template>
+      <ng-template [ngIf]="estaAutenticado">
+        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="salir()">Salir</button>
+      </ng-template>
+      
     </div>
 
   </nav>

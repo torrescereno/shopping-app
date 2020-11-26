@@ -68,9 +68,24 @@ export class AuthService {
       tap((resp) => this.controlarUserario(resp)));
   }
 
+  getUser(idToken: string): Observable<AuthReponseData> {
+
+    const urlObt = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup';
+
+    return this.http.post<any>(
+      `${urlObt}`,
+      {
+        idToken,
+      },
+      {
+        params: new HttpParams().set('key', this.API_KEY)
+      }
+    );
+  }
+
   controladorError(resp: any): Observable<any> {
-    const error = 'Se producjo un error';
-    return throwError(error);
+    const error = resp.error.error.message;
+    return throwError(resp);
   }
 
   controlarUserario(resp: AuthReponseData): void {

@@ -3,6 +3,9 @@ import { HomeComponent } from './home/home.component';
 import { MiListaComponent } from './mi-lista/mi-lista.component';
 import { ProductosComponent } from './productos/productos.component';
 import { AuthComponent } from './auth/auth.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { CarritoComponent } from './carrito/carrito.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
@@ -16,7 +19,14 @@ const routes: Routes = [
     {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    },
+    {
+      path: 'nosotros',
+      component: NosotrosComponent ,
+    },
+    {
+      path: 'contacto',
+      component: ContactoComponent ,
     },
     {
       path: 'lista',
@@ -24,9 +34,13 @@ const routes: Routes = [
       canActivate: [AuthGuard]
     },
     {
+      path: 'carrito',
+      component: CarritoComponent,
+      canActivate: [AuthGuard]
+    },
+    {
       path: 'productos',
       component: ProductosComponent,
-      canActivate: [AuthGuard]
     },
     {
       path: 'login',

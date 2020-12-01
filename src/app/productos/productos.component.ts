@@ -15,13 +15,17 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.auhtService.idToken) {
+    this.productoSerice.listarProductos().subscribe(data => {
+      this.productos = data;
+    });
+
+    /* if (this.auhtService.idToken) {
       this.productoSerice.getProducto().subscribe(data => {
         this.productos = data;
       });
     }else{
       console.log('sesion cerrada');
-    }
+    } */
   }
 
 }

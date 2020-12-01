@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <form class="container w-75 mt-3" (ngSubmit)="onSubmit(this.login)" #form="ngForm">
+    <form class="container w-75 mt-3" (ngSubmit)="onSubmit(login)" #form="ngForm">
 
         <div class="form-group">
             <label for="">Email</label>
@@ -18,7 +18,7 @@
             <input type="password" class="form-control" name="password" required minlength="6" ngModel>
             <small id="emailHelpId" class="form-text text-muted"></small>
         </div>
-        <ng-template [ngIf]="!this.login">
+        <ng-template [ngIf]="!login">
             <div class="form-group">
                 <label for="">Confirmar contraseña</label>
                 <input type="password" class="form-control" name="conPassword" ngModel>
@@ -31,8 +31,8 @@
               <button type="submit" class="btn btn-outline-info btn-block">Enviar</button>
             </div>
             <div class="col-12 col-md-3 form-auth-link">
-                <ng-template [ngIf]="this.login"><div (click)="formRegistro()">No tienes una cuenta ?</div></ng-template>
-                <ng-template [ngIf]="!this.login"><div (click)="formLogin()">Ya tienes una cuenta ?</div></ng-template>             
+                <ng-template [ngIf]="login"><div (click)="formRegistro()">No tienes una cuenta ?</div></ng-template>
+                <ng-template [ngIf]="!login"><div (click)="formLogin()">Ya tienes una cuenta ?</div></ng-template>             
             </div>
         </div>
 

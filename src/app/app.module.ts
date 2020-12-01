@@ -16,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 // Routing
 import { routesPages } from './app.route';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { UsuarioComponent } from './usuario/usuario.component';
     AuthComponent,
     DescuentoPipe,
     UsuarioComponent,
+    NosotrosComponent,
+    ContactoComponent,
+    CarritoComponent,
   ],
   imports: [
     BrowserModule,

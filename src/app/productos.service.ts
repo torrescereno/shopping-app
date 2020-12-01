@@ -26,7 +26,12 @@ export class ProductosService {
     return this.http.put('https://shopping-app-d41b8.firebaseio.com/productos.json', this.productos);
   } */
 
-  getProducto():Observable<any>{
+
+  listarProductos(): Observable<any> {
+    return this.http.get(this.url);
+  };
+
+  getProducto(): Observable<any>{
     return this.http.get(this.url,{
         params: new HttpParams().set('auth', this.authService.idToken)
       }

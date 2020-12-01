@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(login): void {
+  onSubmit(): void {
 
     this.isLoading = true;
     this.error = null;
@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit {
 
     };
 
-    if (login) {
+    if (this.login) {
       /* Login */
       this.authService.login(this.formulario.value.email, this.formulario.value.password).subscribe(
         observer

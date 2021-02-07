@@ -11,7 +11,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { ErrorComponent } from './error/error.component';
 import { AuthComponent } from './auth/auth.component';
 import { DescuentoPipe } from './pipes/descuento.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Routing
 import { routesPages } from './app.route';
@@ -42,6 +42,7 @@ import { CarritoComponent } from './carrito/carrito.component';
     HttpClientModule,
     routesPages,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

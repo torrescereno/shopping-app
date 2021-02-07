@@ -1,8 +1,71 @@
 <div class="container mt-3">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1>Contacto</h1>
+
+    <div class="row align-items-center">
+
+        <div class="col-12 col-lg-7 m-0 p-0">
+
+            <!-- REACTIVE FORM 
+                FORMULARIO DE CONTACTO -->
+
+            <form class="m-auto" [formGroup]="formContacto" (ngSubmit)="enviar()">
+
+                <div class="row col-12 form-group">
+                    <div class="col-md-6">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" name="nombre" formControlName="nombre">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Apellido</label>
+                        <input type="text" class="form-control" name="apellido" formControlName="apellido">
+                    </div>
+                </div>
+
+                <div class="row form-group col-12">
+                    <div class="col-12">
+                        <label>Mail</label>
+                        <input type="mail" class="form-control md-textarea" name="mail" formControlName="mail">
+                    </div>
+                </div>
+
+                <div class="row form-group col-12">
+                    <div class="col-12">
+                        <label>Mensaje</label>
+                        <textarea name="mensaje" id="" cols="30" rows="8" class="form-control"
+                            formControlName="mensaje"></textarea>
+                    </div>
+                </div>
+
+                <div class="row col-12">
+                    <div class="col-12">
+                        <button class="btn w-100">Enviar</button>
+                    </div>
+                </div>
+
+            </form>
+
         </div>
+
+        <div class="col-12 col-lg-5">
+            <h2>Como te puedo ayudar ?</h2>
+
+            <span>
+                <p>Escribenos si tienes alguna duda soble algún producto</p>
+            </span>
+
+            <span>
+                <h4>Producto</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, suscipit?</p>
+            </span>
+            <span>
+                <h4>Trabajo</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, suscipit?</p>
+            </span>
+            <span>
+                <h4>Sugerencias</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, suscipit?</p>
+            </span>
+        </div>
+
     </div>
-    
+
 </div>
